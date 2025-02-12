@@ -1,0 +1,60 @@
+{% extends "base.html" %} 
+{% block title %}Weather App Demo{% endblock title %}
+
+{% block content %} 
+
+    <div class="container">
+        <div class="weather">
+            <h1 class="header">Kathmandu</h1>
+            <div class="cards">
+                <div class="card">
+                    <div class="city"></div>
+                    <div class="sunny">
+                        <img src="https://cdn.jim-nielsen.com/ios/512/today-weather-2015-08-20.png?rf=1024" alt="Sunny weather icon">
+                    </div>
+                    <div class="temp">
+                        <span class="deg">40&deg;</span>
+                        <span>Sunny</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="city"></div>
+                    <div class="cloudy">
+                        <img src="https://cdn.jim-nielsen.com/ios/512/weather-2021-12-07.png?rf=1024" alt="Cloudy weather icon">
+                    </div>
+                    <div class="temp">
+                        <span class="deg">25&deg;</span>
+                        <span>Cloudy</span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="city"></div>
+                    <div class="rainy">
+                        <img src="https://cdn.jim-nielsen.com/ios/512/weather-2019-02-07.png?rf=1024" alt="Rainy weather icon">
+                    </div>
+                    <div class="temp">
+                        <span class="deg">14&deg;</span>
+                        <span>Rainy</span>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <div class="city"></div>
+                    <div class="snow">
+                        <img src="https://cdn3.iconfinder.com/data/icons/winter-flat-8/32/Winter_season_cold_snow_snowflake_Christmas_frost-512.png" alt="Snowy weather icon">
+                    </div>
+                    <div class="temp">
+                        <span class="deg">-10&deg;</span>
+                        <span>Snowy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock content %} 

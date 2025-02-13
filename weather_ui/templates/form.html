@@ -1,0 +1,12 @@
+{% comment %} {% extends 'base.html' %} {% endcomment %}
+
+{%load crispy_forms_tags %}
+
+<form method='POST'>
+    {%csrf_token%}
+    {{form|crispy}}
+<button type='submit'>Submit</button>
+Already Have An Account? <a href='#'>Login</a>
+</form>
+
+    

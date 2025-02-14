@@ -1,14 +1,16 @@
-{% comment %} {% extends 'base.html' %} {% endcomment %}
+{% extends 'base.html' %}
 
 {%load crispy_forms_tags %}
 
-<form method='POST'>
+{% block content %}
+
+<form method='POST' class='form-group'>
     {%csrf_token%}
     {{ form|crispy }}
 <br>
 
-<button type='submit'>Submit</button>
+<button type='submit' class='btn btn-success'>Submit</button><br><br>
 Already Have An Account? <a href='#'>Login</a>
 </form>
 
-    
+{% endblock%}

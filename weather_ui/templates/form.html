@@ -4,7 +4,9 @@
 
 <form method='POST'>
     {%csrf_token%}
-    {{form|crispy}}
+    {{ form|crispy }}
+<br>
+
 <button type='submit'>Submit</button>
 Already Have An Account? <a href='#'>Login</a>
 </form>

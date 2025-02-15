@@ -3,16 +3,16 @@
 
 {%block content%}
     <div class="container">
-        <!-- Mode Toggle -->
-        <div class="mode-toggle">
-            <div class="switch">
-                <i class="fas fa-moon"></i>
-            </div>
-            <span>Dark Mode</span>
-        </div>
-
+        
         <!-- Search Bar -->
         <div class="search-container">
+            <!-- Mode Toggle -->
+            <div class="mode-toggle">
+                <div class="switch">
+                    <i class="fas fa-moon"></i>
+                </div>
+                {% comment %} <span>Dark Mode</span> {% endcomment %}
+            </div>
             <div class="search-bar">
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search for your preferred city...">
@@ -23,7 +23,10 @@
             </button> {% endcomment %}
 
             <div class='buttons'>
-                <a href='http://0.0.0.0:8000/register/' class='btn btn-success'> SignUp</a>
+                <a href='http://0.0.0.0:8000/register/' class='location-btn'> SignUp</a>
+            </div>
+            <div class='buttons'>
+                <a href='http://0.0.0.0:8000/register/' class='location-btn'> Login</a>
             </div>
         </div>
 

@@ -17,10 +17,14 @@
                 <i class="fas fa-search"></i>
                 <input type="text" placeholder="Search for your preferred city...">
             </div>
-            <button class="location-btn">
+            {% comment %} <button class="location-btn">
                 <i class="fas fa-location-dot"></i>
                 Current Location
-            </button>
+            </button> {% endcomment %}
+
+            <div class='buttons'>
+                <a href='http://0.0.0.0:8000/register/' class='btn btn-success'> SignUp</a>
+            </div>
         </div>
 
         <!-- Main Weather Card -->
@@ -30,50 +34,52 @@
                 <div class="time">09:03</div>
                 <div class="date">Thursday, 31 Aug</div>
             </div>
+            <div class='container weather-info'>
 
-            <div class="weather-info">
-                <div class="temperature">
-                    24°C
-                    <span class="feels-like">Feels like: 22°C</span>
-                </div>
-                <div class="weather-details">
-                    <div class="sun-info">
-                        <div class="sunrise">
-                            <i class="wi wi-sunrise"></i>
-                            <span>06:37 AM</span>
+                <div class="weather-info">
+                    <div class="temperature">
+                        24°C
+                        <span class="feels-like">Feels like: 22°C</span>
+                    </div>
+                    <div class="weather-details">
+                        <div class="sun-info">
+                            <div class="sunrise">
+                                <i class="wi wi-sunrise"></i>
+                                <span>06:37 AM</span>
+                            </div>
+                            <div class="sunset">
+                                <i class="wi wi-sunset"></i>
+                                <span>20:37 PM</span>
+                            </div>
                         </div>
-                        <div class="sunset">
-                            <i class="wi wi-sunset"></i>
-                            <span>20:37 PM</span>
+                        <div class="condition">
+                            <i class="wi wi-day-sunny"></i>
+                            <span>Sunny</span>
                         </div>
                     </div>
-                    <div class="condition">
+                </div>
+    
+                <div class="weather-metrics">
+                    <div class="metric">
+                        <i class="wi wi-humidity"></i>
+                        <span>41%</span>
+                        <label>Humidity</label>
+                    </div>
+                    <div class="metric">
+                        <i class="wi wi-strong-wind"></i>
+                        <span>2km/h</span>
+                        <label>Wind Speed</label>
+                    </div>
+                    <div class="metric">
+                        <i class="wi wi-barometer"></i>
+                        <span>997hPa</span>
+                        <label>Pressure</label>
+                    </div>
+                    <div class="metric">
                         <i class="wi wi-day-sunny"></i>
-                        <span>Sunny</span>
+                        <span>8</span>
+                        <label>UV</label>
                     </div>
-                </div>
-            </div>
-
-            <div class="weather-metrics">
-                <div class="metric">
-                    <i class="wi wi-humidity"></i>
-                    <span>41%</span>
-                    <label>Humidity</label>
-                </div>
-                <div class="metric">
-                    <i class="wi wi-strong-wind"></i>
-                    <span>2km/h</span>
-                    <label>Wind Speed</label>
-                </div>
-                <div class="metric">
-                    <i class="wi wi-barometer"></i>
-                    <span>997hPa</span>
-                    <label>Pressure</label>
-                </div>
-                <div class="metric">
-                    <i class="wi wi-day-sunny"></i>
-                    <span>8</span>
-                    <label>UV</label>
                 </div>
             </div>
         </div>

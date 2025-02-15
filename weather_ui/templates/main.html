@@ -22,11 +22,10 @@
                 Current Location
             </button> {% endcomment %}
             {% if user.is_authenticated %}
-                <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %} 
-                    <a href="{%url 'logout' %}" class='location-btn'>Logout</a>
-                    {% comment %} <button type="submit">Logout</button> {% endcomment %}
-                </form>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit"  class='location-btn'>Log out</button>
+            </form>
                
             {% else %}
                 <div class='buttons'>

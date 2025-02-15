@@ -5,12 +5,13 @@ from .forms import UserRegistrationForm
 from django.contrib import messages
 
 
+
 # Create your views here.
 def test(request):
     return render(request, 'index.html', context={'hello':'there'})
 
 def login(request):
-    return render(request, 'uni_form.html')
+    return render(request, 'login.html')
 
 def index(request):
     context = {
@@ -67,9 +68,9 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'username {username}')
+            messages.success(request, f'Created account now you can login {username}')
             # messages.add_message('username')
-            return redirect('/')
+            return redirect('login')
     else:
         form = UserRegistrationForm()
 

@@ -1,0 +1,153 @@
+{% extends 'base.html' %}
+{%block title%} Weather UI {%endblock title%}
+
+{%block content%}
+    <div class="container">
+        <!-- Mode Toggle -->
+        <div class="mode-toggle">
+            <div class="switch">
+                <i class="fas fa-moon"></i>
+            </div>
+            <span>Dark Mode</span>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search for your preferred city...">
+            </div>
+            <button class="location-btn">
+                <i class="fas fa-location-dot"></i>
+                Current Location
+            </button>
+        </div>
+
+        <!-- Main Weather Card -->
+        <div class="weather-card">
+            <div class="location-info">
+                <h2>Athens</h2>
+                <div class="time">09:03</div>
+                <div class="date">Thursday, 31 Aug</div>
+            </div>
+
+            <div class="weather-info">
+                <div class="temperature">
+                    24°C
+                    <span class="feels-like">Feels like: 22°C</span>
+                </div>
+                <div class="weather-details">
+                    <div class="sun-info">
+                        <div class="sunrise">
+                            <i class="wi wi-sunrise"></i>
+                            <span>06:37 AM</span>
+                        </div>
+                        <div class="sunset">
+                            <i class="wi wi-sunset"></i>
+                            <span>20:37 PM</span>
+                        </div>
+                    </div>
+                    <div class="condition">
+                        <i class="wi wi-day-sunny"></i>
+                        <span>Sunny</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="weather-metrics">
+                <div class="metric">
+                    <i class="wi wi-humidity"></i>
+                    <span>41%</span>
+                    <label>Humidity</label>
+                </div>
+                <div class="metric">
+                    <i class="wi wi-strong-wind"></i>
+                    <span>2km/h</span>
+                    <label>Wind Speed</label>
+                </div>
+                <div class="metric">
+                    <i class="wi wi-barometer"></i>
+                    <span>997hPa</span>
+                    <label>Pressure</label>
+                </div>
+                <div class="metric">
+                    <i class="wi wi-day-sunny"></i>
+                    <span>8</span>
+                    <label>UV</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forecast Container -->
+        <div class="forecast-container">
+            <!-- 5 Days Forecast -->
+            <div class="forecast-section">
+                <div class="forecast-header">5 Days Forecast:</div>
+                <div class="forecast-list">
+                    <div class="forecast-item">
+                        <i class="wi wi-day-cloudy"></i>
+                        <span class="temp">20°C</span>
+                        <span class="day">Friday, 1 Sep</span>
+                    </div>
+                    <div class="forecast-item">
+                        <i class="wi wi-day-cloudy"></i>
+                        <span class="temp">22°C</span>
+                        <span class="day">Saturday, 2 Sep</span>
+                    </div>
+                    <div class="forecast-item">
+                        <i class="wi wi-day-sunny"></i>
+                        <span class="temp">27°C</span>
+                        <span class="day">Sunday, 3 Sep</span>
+                    </div>
+                    <div class="forecast-item">
+                        <i class="wi wi-day-rain"></i>
+                        <span class="temp">18°C</span>
+                        <span class="day">Monday, 4 Sep</span>
+                    </div>
+                    <div class="forecast-item">
+                        <i class="wi wi-day-rain"></i>
+                        <span class="temp">16°C</span>
+                        <span class="day">Tuesday, 5 Sep</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hourly Forecast -->
+            <div class="forecast-section">
+                <div class="forecast-header">Hourly Forecast:</div>
+                <div class="hourly-list">
+                    <div class="hourly-item">
+                        <div class="time">12:00</div>
+                        <i class="wi wi-day-sunny"></i>
+                        <div class="temp">26°C</div>
+                        <div class="wind">3km/h</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="time">15:00</div>
+                        <i class="wi wi-day-sunny"></i>
+                        <div class="temp">27°C</div>
+                        <div class="wind">2km/h</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="time">18:00</div>
+                        <i class="wi wi-day-cloudy"></i>
+                        <div class="temp">27°C</div>
+                        <div class="wind">3km/h</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="time">21:00</div>
+                        <i class="wi wi-night-cloudy"></i>
+                        <div class="temp">25°C</div>
+                        <div class="wind">3km/h</div>
+                    </div>
+                    <div class="hourly-item">
+                        <div class="time">00:00</div>
+                        <i class="wi wi-night-clear"></i>
+                        <div class="temp">22°C</div>
+                        <div class="wind">3km/h</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock content%}

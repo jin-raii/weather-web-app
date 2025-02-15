@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#w*s(h_$_9fe4=rtw%y=#sy)@mir!^qojsq#$cof(ro0zh==eg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-AUTH_USER_MODEL = 'weather_ui.User'
+# AUTH_USER_MODEL = 'weather_ui.User'
 
 ALLOWED_HOSTS = []
 

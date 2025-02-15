@@ -27,7 +27,7 @@ DEBUG = True
 
 # AUTH_USER_MODEL = 'weather_ui.User'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

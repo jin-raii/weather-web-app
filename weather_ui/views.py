@@ -3,9 +3,9 @@ from django.shortcuts import render, redirect
 from django.http import request, HttpResponse
 from .forms import UserRegistrationForm
 from django.contrib import messages
-
-
-
+from dotenv import dotenv_values
+from pathlib import Path
+dotenv_values(Path('../.env'))
 # Create your views here.
 def test(request):
     return render(request, 'index.html', context={'hello':'there'})
@@ -29,7 +29,7 @@ def index(request):
 def weather_dashboard(request):
     context = {
         'current_weather': {
-            'city': 'Athens',
+            'city': 'Kathmandu',
             'temperature': 24,
             'feels_like': 22,
             'condition': 'Sunny',

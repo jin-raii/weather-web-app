@@ -19,25 +19,24 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchInput = document.querySelector('.search-bar input');
     searchInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
-            // Here you would typically make an API call to get weather data
             // for the searched city
             console.log('Searching for:', this.value);
         }
     });
 
     // Current location button
-    const locationBtn = document.querySelector('.location-btn');
-    locationBtn.addEventListener('click', () => {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
-                const { latitude, longitude } = position.coords;
-                // Here you would make an API call using these coordinates
-                console.log('Location:', latitude, longitude);
-            }, error => {
-                console.error('Error getting location:', error);
-            });
-        }
-    });
+    // const locationBtn = document.querySelector('.location-btn');
+    // locationBtn.addEventListener('click', () => {
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(position => {
+    //             const { latitude, longitude } = position.coords;
+    //             // Here you would make an API call using these coordinates
+    //             console.log('Location:', latitude, longitude);
+    //         }, error => {
+    //             console.error('Error getting location:', error);
+    //         });
+    //     }
+    // });
 
     // Update time
     function updateTime() {

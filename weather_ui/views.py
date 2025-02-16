@@ -27,7 +27,6 @@ def index(request):
     return render(request, 'main.html', context=context)
 
 def weather_dashboard(request):
-    # In a real application, you would fetch this data from a weather API
     context = {
         'current_weather': {
             'city': 'Athens',

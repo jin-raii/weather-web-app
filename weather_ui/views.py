@@ -1,11 +1,17 @@
-import datetime
+import datetime  
 from django.shortcuts import render, redirect
 from django.http import request, HttpResponse
 from .forms import UserRegistrationForm
 from django.contrib import messages
 from dotenv import dotenv_values
 from pathlib import Path
-dotenv_values(Path('../.env'))
+from datetime import datetime
+import os
+import requests
+
+# ENV = dotenv_values(Path('../.env'))
+# print(f'env file {ENV["WEATHER_API_KEY"]}')
+ENV = os.environ.get('WEATHER_API_KEY')
 # Create your views here.
 def test(request):
     return render(request, 'index.html', context={'hello':'there'})
@@ -40,7 +46,7 @@ def weather_dashboard(request):
             # 'timezone': pytz.timezone('Asia/kathmandu'),
             'timezone':'timezone',
             # 'current_time': datetime.now(pytz.timezone('Asia/kathmandu')),
-            'current_time': 'current_time',
+            'current_time': datetime.now(),
             'sunrise': '06:37 AM',
             'sunset': '20:37 PM'
         },
@@ -59,7 +65,13 @@ def weather_dashboard(request):
             {'time': '00:00', 'temp': 22, 'condition': 'Clear', 'wind': 3}
         ]
     }
+    get_response()
     return render(request, 'main.html', context)
+
+def get_response():
+    url = f'https://api.openweathermap.org/data/2.5/weather?q=kathmandu&appid={ENV}'
+    response = requests.get(url).json()
+    print(response)
 
 def register(request):
     if request.method == 'POST':

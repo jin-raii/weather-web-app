@@ -2,6 +2,7 @@
 {%block title%} Weather UI {%endblock title%}
 
 {%block content%}
+
     <div class="container">
         
         <!-- Search Bar -->
@@ -40,8 +41,12 @@
         <!-- Main Weather Card -->
         <div class="weather-card">
             <div class="location-info">
-                <h2>Athens</h2>
-                <div class="time">09:03</div>
+                {% comment %} {% for weather in current_weather.items  %}
+                    <h2> {{weather}} </h2>
+                {% endfor %}  {% endcomment %}
+            
+                <h2>{{current_weather.city}}</h2>
+                <div class="time">{{ current_weather.timezone  }}</div>
                 <div class="date">Thursday, 31 Aug</div>
             </div>
             <div class='container weather-info'>

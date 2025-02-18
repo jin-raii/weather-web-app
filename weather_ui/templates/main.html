@@ -41,11 +41,11 @@
         <!-- Main Weather Card -->
         <div class="weather-card">
             <div class="location-info">
-                {% comment %} {% for weather in current_weather.items  %}
+                {% comment %} {% for weather in res  %}
                     <h2> {{weather}} </h2>
-                {% endfor %}  {% endcomment %}
-            
-                <h2>{{current_weather.city}}</h2>
+                {% endfor %}   {% endcomment %}
+               
+                <h2>{{res.name}}</h2>
                 <div class="time">{{ current_weather.timezone  }}</div>
                 <div class="date">Thursday, 31 Aug</div>
             </div>
@@ -53,8 +53,8 @@
 
                 <div class="weather-info">
                     <div class="temperature">
-                        24°C
-                        <span class="feels-like">Feels like: 22°C</span>
+                        {{res.main.temp}}&deg;C
+                        <span class="feels-like">Feels like: {{res.main.feels_like}}&deg;C</span>
                     </div>
                     <div class="weather-details">
                         <div class="sun-info">
@@ -69,7 +69,7 @@
                         </div>
                         <div class="condition">
                             <i class="wi wi-day-sunny"></i>
-                            <span>Sunny</span>
+                            <span>{{res.weather.main}}</span>
                         </div>
                     </div>
                 </div>
@@ -77,17 +77,17 @@
                 <div class="weather-metrics">
                     <div class="metric">
                         <i class="wi wi-humidity"></i>
-                        <span>41%</span>
+                        <span>{{res.main.humidity}}</span>
                         <label>Humidity</label>
                     </div>
                     <div class="metric">
                         <i class="wi wi-strong-wind"></i>
-                        <span>2km/h</span>
+                        <span>{{res.wind.speed}}km/h</span>
                         <label>Wind Speed</label>
                     </div>
                     <div class="metric">
                         <i class="wi wi-barometer"></i>
-                        <span>997hPa</span>
+                        <span>{{res.main.pressure}}hPa</span>
                         <label>Pressure</label>
                     </div>
                     <div class="metric">

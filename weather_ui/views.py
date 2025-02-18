@@ -12,6 +12,7 @@ import requests
 # ENV = dotenv_values(Path('../.env'))
 # print(f'env file {ENV["WEATHER_API_KEY"]}')
 ENV = os.environ.get('WEATHER_API_KEY')
+FORECAST_ENV = os.environ.get('WEATHER_FORECAST_API_KEY')
 # Create your views here.
 def test(request):
     return render(request, 'index.html', context={'hello':'there'})
@@ -65,13 +66,23 @@ def weather_dashboard(request):
             {'time': '00:00', 'temp': 22, 'condition': 'Clear', 'wind': 3}
         ]
     }
-    get_response()
-    return render(request, 'main.html', context)
+    res = get_current_data()
+    get_forecast()
+    print(f'response : {res}')
+    return render(request, 'main.html', {'res':res})
 
-def get_response():
+def get_current_data():
+    
     url = f'https://api.openweathermap.org/data/2.5/weather?q=kathmandu&appid={ENV}'
     response = requests.get(url).json()
-    print(response)
+    return response
+
+def get_forecast():
+    print('forecast api key', FORECAST_ENV)
+    url = f'https://api.openweathermap.org/data/2.5/forecast/daily?q=kathmandu&cnt=1&appid={FORECAST_ENV}'
+    response = requests.get(url).json()
+    print(f'forecast: {response}')
+    return response
 
 def register(request):
     if request.method == 'POST':

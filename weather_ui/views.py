@@ -72,7 +72,7 @@ def weather_dashboard(request):
     }
     res = get_current_data()
     get_forecast()
-    print(f'response : {res}')
+    # print(f'response : {res}')
     return render(request, 'main.html', {'res':res})
 
 def get_current_data():
@@ -89,7 +89,7 @@ def get_forecast():
     # print(f'forecast: {response.keys()}')
     # print(f'forecast: {response.values()}')
     # print(f'forecast length: {len(response)}')
-    print(response)
+    # print(response)
     return response
 
 def register(request):
@@ -112,20 +112,29 @@ def register(request):
 def weather_map(request):
 
     weather_data = None
+    default_city = 'kathmandu'
     
     if request.method == 'POST':
         form = CityForm(request.POST)
+
         if form.is_valid():
             city = form.cleaned_data['city']
             url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={ENV}&units=metric'
             response = requests.get(url)
             if response.status_code == 200:
                 weather_data = response.json()
+                print(f'weather_data: {weather_map}')
     else:
-        form = CityForm()
+        form = CityForm(initial={'city': default_city})
+        url = f'http://api.openweathermap.org/data/2.5/weather?q=kathmandu&appid={ENV}&units=metric'
+        res = requests.get(url)
+        if res.status_code == 200:
+            weather_data = res.json()
 
-    return render(request, 'map.html', {
+    res = get_current_data()
+    return render(request, 'main.html', {
         'form': form,
         'weather_data': weather_data,
-        'mapbox_access_token': 'your_mapbox_token'  # Optional for Mapbox
+        'mapbox_access_token': 'your_mapbox_token',
+        'res': res
     })

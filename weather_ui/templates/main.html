@@ -15,8 +15,23 @@
                 {% comment %} <span>Dark Mode</span> {% endcomment %}
             </div>
             <div class="search-bar">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Search for your preferred city...">
+                <form method="post" class="mb-4" id="weatherForm">
+                    
+                  
+                {% comment %} <i class="fas fa-search"></i>  {% endcomment %}
+                {% comment %} <input type="text" placeholder="Search for your preferred city...">  {% endcomment %}
+                <form method="post" class="mb-4" id="weatherForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{ form.city }}
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+                
             </div>
             {% comment %} <button class="location-btn">
                 <i class="fas fa-location-dot"></i>
@@ -37,7 +52,7 @@
                 </div>
             {%endif%}
         </div>
-
+        
         <!-- Main Weather Card -->
         <div class="weather-card">
             <div class="location-info">
@@ -53,8 +68,9 @@
 
                 <div class="weather-info">
                     <div class="temperature">
-                        {{res.main.temp}}&deg;C
+                        {{weather_data.main.temp}}&deg;C
                         <span class="feels-like">Feels like: {{res.main.feels_like}}&deg;C</span>
+                       <span class='feels-like'> Weather: {{ weather_data.weather.0.description }}</span>
                     </div>
                     <div class="weather-details">
                         <div class="sun-info">
@@ -99,6 +115,11 @@
             </div>
         </div>
 
+        <!-- Leaflet Map  -->
+        <div class="container mt-4">
+            <div id="map"></div>
+        </div>
+        
         <!-- Forecast Container -->
         <div class="forecast-container">
             <!-- 5 Days Forecast -->

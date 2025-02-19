@@ -281,3 +281,11 @@ body {
 
 
 
+/* #map { height: 500px; } */
+.weather-card { margin-top: 20px; }
+#map {
+    height: 500px;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+}

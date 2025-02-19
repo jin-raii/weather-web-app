@@ -54,7 +54,7 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    background: var(--card-dark);
+    /* background: var(--card-dark); */
     border-radius: 25px;
     padding: 5px 15px;
 }
@@ -62,10 +62,25 @@ body {
 .search-bar input {
     width: 100%;
     padding: 10px;
-    background: transparent;
+    background: #272626;
     border: none;
     color: var(--text-dark);
     margin-left: 10px;
+    /* border-radius: 50px; */
+    margin-right: -50px;
+   
+}
+
+.btn-search {
+    float: left;
+  width: 20%;
+  padding: 8px;
+  background: var(--card-dark);
+  color: white;
+  font-size: 17px;
+  border: 1px solid var(--accent-green);
+  /* border-left: none; */
+  cursor: pointer;
 }
 
 .location-btn {

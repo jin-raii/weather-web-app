@@ -9,3 +9,10 @@ class UserRegistrationForm(UserCreationForm):
         model=User
         fields=['username','email','password1','password2']
 
+
+
+class CityForm(forms.Form):
+    city = forms.CharField(label='', widget=forms.TextInput(attrs={
+        'placeholder': 'Enter city name',
+        'class': 'form-control'
+    }))

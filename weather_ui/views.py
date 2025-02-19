@@ -1,13 +1,17 @@
 import datetime  
 from django.shortcuts import render, redirect
 from django.http import request, HttpResponse
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, CityForm
 from django.contrib import messages
 from dotenv import dotenv_values
 from pathlib import Path
 from datetime import datetime
 import os
 import requests
+
+from django.conf import settings
+
+
 
 # ENV = dotenv_values(Path('../.env'))
 # print(f'env file {ENV["WEATHER_API_KEY"]}')
@@ -72,16 +76,20 @@ def weather_dashboard(request):
     return render(request, 'main.html', {'res':res})
 
 def get_current_data():
-    
-    url = f'https://api.openweathermap.org/data/2.5/weather?q=kathmandu&appid={ENV}'
-    response = requests.get(url).json()
-    return response
+    try:
+        url = f'https://api.openweathermap.org/data/2.5/weather?q=kathmandu&appid={ENV}'
+        response = requests.get(url).json()
+        return response
+    except Exception as e:
+        raise HttpResponse({'error': 'something went wrong'})
 
 def get_forecast():
-    print('forecast api key', FORECAST_ENV)
-    url = f'https://api.openweathermap.org/data/2.5/forecast/daily?q=kathmandu&cnt=1&appid={FORECAST_ENV}'
+    url = f'https://api.openweathermap.org/data/2.5/forecast?q=kathmandu&appid={FORECAST_ENV}'
     response = requests.get(url).json()
-    print(f'forecast: {response}')
+    # print(f'forecast: {response.keys()}')
+    # print(f'forecast: {response.values()}')
+    # print(f'forecast length: {len(response)}')
+    print(response)
     return response
 
 def register(request):
@@ -98,3 +106,26 @@ def register(request):
 
     return render(request, 'form.html', {'form': form})
 
+
+
+
+def weather_map(request):
+
+    weather_data = None
+    
+    if request.method == 'POST':
+        form = CityForm(request.POST)
+        if form.is_valid():
+            city = form.cleaned_data['city']
+            url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={ENV}&units=metric'
+            response = requests.get(url)
+            if response.status_code == 200:
+                weather_data = response.json()
+    else:
+        form = CityForm()
+
+    return render(request, 'map.html', {
+        'form': form,
+        'weather_data': weather_data,
+        'mapbox_access_token': 'your_mapbox_token'  # Optional for Mapbox
+    })

@@ -10,8 +10,10 @@ import os
 import requests
 
 from django.conf import settings
-
-
+from plotly.offline import plot
+from plotly.graph_objects import Scatter3d, Scatter
+import pandas as pd
+import json
 
 # ENV = dotenv_values(Path('../.env'))
 # print(f'env file {ENV["WEATHER_API_KEY"]}')
@@ -132,9 +134,57 @@ def weather_map(request):
             weather_data = res.json()
 
     res = get_current_data()
+    plot_d =  plot_data()
     return render(request, 'main.html', {
         'form': form,
         'weather_data': weather_data,
         'mapbox_access_token': 'your_mapbox_token',
-        'res': res
+        'res': res,
+        'plot': plot_d
     })
+
+def plot_data():
+    
+    data = pd.DataFrame(flatten_weather_data())
+    plot_div = plot([Scatter(x=data['temperature'], y=data['humidity'])], output_type='div')
+    return plot_div
+
+
+
+def flatten_weather_data():
+    flattened_data = []
+    file_path = os.path.join(os.path.dirname(__file__), 'static/data_kathmandu_weather.json')
+    with open(file_path, 'r') as d:
+      data = json.load(d)
+
+    for item in data:
+        # print(item)
+        flat_dict = {
+            'timestamp': datetime.fromtimestamp(item['timestamp']).strftime('%Y-%m-%d %H:%M:%S'),
+            'longitude': item['data']['coord']['lon'],
+            'latitude': item['data']['coord']['lat'],
+            'weather_id': item['data']['weather'][0]['id'],
+            'weather_main': item['data']['weather'][0]['main'],
+            'weather_description': item['data']['weather'][0]['description'],
+            'temperature': item['data']['main']['temp'],
+            'feels_like': item['data']['main']['feels_like'],
+            'temp_min': item['data']['main']['temp_min'],
+            'temp_max': item['data']['main']['temp_max'],
+            'pressure': item['data']['main']['pressure'],
+            'humidity': item['data']['main']['humidity'],
+            'sea_level': item['data']['main']['sea_level'],
+            'ground_level': item['data']['main']['grnd_level'],
+            'visibility': item['data']['visibility'],
+            'wind_speed': item['data']['wind']['speed'],
+            'wind_degree': item['data']['wind']['deg'],
+            'clouds_percentage': item['data']['clouds']['all'],
+            'country': item['data']['sys']['country'],
+            'sunrise': datetime.fromtimestamp(item['data']['sys']['sunrise']).strftime('%Y-%m-%d %H:%M:%S'),
+            'sunset': datetime.fromtimestamp(item['data']['sys']['sunset']).strftime('%Y-%m-%d %H:%M:%S'),
+            'timezone': item['data']['timezone'],
+            'city_id': item['data']['id'],
+            'city_name': item['data']['name']
+        }
+        flattened_data.append(flat_dict)
+
+    return flattened_data

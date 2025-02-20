@@ -26,7 +26,7 @@
                             {{ form.city }}
                       
                        
-                            <button type="submit" class="btn btn-search"><i class="fas fa-search" style="color: white;"></i></button>
+                            <button type="submit" class="btn btn-search" id='search-btn'><i class="fas fa-search" style="color: white;"></i></button>
                        
                
                 </form>
@@ -118,6 +118,13 @@
         <div class="container mt-4">
             <div id="map"></div>
         </div>
+
+        {% autoescape off %}
+        
+            <div class="container mt-4">
+                {{plot}}
+            </div>
+        {% endautoescape %}
 
         <!-- Forecast Container -->
         <div class="forecast-container">

@@ -16,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Search functionality
-    const searchInput = document.querySelector('.search-bar input');
+    const searchInput = document.querySelector('#search-btn');
     searchInput.addEventListener('keypress', function(e) {
+        console.log('testing: ', this.value)
         if (e.key === 'Enter') {
             // for the searched city
             console.log('Searching for:', this.value);

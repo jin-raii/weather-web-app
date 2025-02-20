@@ -16,3 +16,4 @@ class CityForm(forms.Form):
         'placeholder': 'Enter city name',
         'class': 'form-control'
     }))
+    

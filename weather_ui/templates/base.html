@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -59,7 +59,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
-      // Initialize map with default coordinates (Kathmandu)
+      // default coordinates (Kathmandu)
       var defaultLat = 27.7172;
       var defaultLon = 85.3240;
       var zoomLevel = 13;
@@ -75,7 +75,7 @@
           
           // Add marker for the city
           L.marker([lat, lon]).addTo(map)
-              .bindPopup("<b>{{ weather_data.name }}</b><br>{{ weather_data.weather.0.description }}")
+              .bindPopup("<b>{{ weather_data.name }}</b><br>{{ weather_data.weather.0.description }}<br>{{ weather_data.main.temp  }}")
               .openPopup();
       {% else %}
           map.setView([defaultLat, defaultLon], zoomLevel);

@@ -12,6 +12,7 @@ import requests
 from django.conf import settings
 from plotly.offline import plot
 from plotly.graph_objects import Scatter3d, Scatter
+import plotly.graph_objs as go
 import pandas as pd
 import json
 
@@ -143,14 +144,60 @@ def weather_map(request):
         'plot': plot_d
     })
 
-def plot_data():
+# def plot_data():
     
-    data = pd.DataFrame(flatten_weather_data())
-    convert_to_date = pd.to_datetime(data['timestamp'])
-    second = convert_to_date.unique()
-    plot_div = plot([Scatter(x=second, y=data['temperature'])],show_link=False, output_type='div',)
-    return plot_div
+#     data = pd.DataFrame(flatten_weather_data())
+#     convert_to_date = pd.to_datetime(data['timestamp'])
+#     second = convert_to_date.unique()
+#     plot_div = plot([Scatter(x=second.dt.second, y=data['temperature'])],show_link=False, output_type='div',)
+#     return plot_div
 
+def plot_data():
+    data = pd.DataFrame(flatten_weather_data())
+    data['timestamp'] = pd.to_datetime(data['timestamp'])
+    
+    # Create figure with dropdown menu
+    fig = go.Figure()
+    
+    # Add traces, one for each metric
+    metrics = ['temperature', 'humidity', 'pressure']
+    for metric in metrics:
+        fig.add_trace(
+            go.Scatter(
+                x=data['timestamp'],
+                y=data[metric],
+                name=metric,
+                visible=(metric == 'temperature')  # Only show temperature by default
+            )
+        )
+    
+    # Create dropdown menu
+    buttons = []
+    for i, metric in enumerate(metrics):
+        visibility = [i == j for j in range(len(metrics))]
+        buttons.append(dict(
+            label=metric.capitalize(),
+            method="update",
+            args=[{"visible": visibility},
+                  {"title": f"{metric.capitalize()} over Time"}]
+        ))
+    
+    # Update layout with dropdown menu
+    fig.update_layout(
+        updatemenus=[dict(
+            active=0,
+            buttons=buttons,
+            direction="down",
+            showactive=True,
+            x=0.1,
+            y=1.15
+        )],
+        title="Temperature over Time"
+    )
+    
+    # Create and return the plot div
+    plot_div = plot(fig, show_link=False, output_type='div')
+    return plot_div
 
 
 def flatten_weather_data():

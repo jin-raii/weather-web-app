@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'weather_ui',
     'crispy_forms',
-    "crispy_bootstrap5"
+    "crispy_bootstrap5",
 ]
 
 MIDDLEWARE = [

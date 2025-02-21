@@ -146,7 +146,9 @@ def weather_map(request):
 def plot_data():
     
     data = pd.DataFrame(flatten_weather_data())
-    plot_div = plot([Scatter(x=data['temperature'], y=data['humidity'])], output_type='div')
+    convert_to_date = pd.to_datetime(data['timestamp'])
+    second = convert_to_date.unique()
+    plot_div = plot([Scatter(x=second, y=data['temperature'])],show_link=False, output_type='div',)
     return plot_div
 
 

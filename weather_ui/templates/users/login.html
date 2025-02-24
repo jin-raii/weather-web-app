@@ -3,11 +3,13 @@
 {%block title %} Login Form {%endblock%}
 
 {%block content%}
-<form method='POST' class='form-group container'>
-    {%csrf_token%}
-    {{ form|crispy}}
-
-<button type='submit' class='btn btn-success'>Login</button><br><br>
-Need An Account? <a href="{% url 'register' %}">Singn Up Now</a>
-</form>
+<div class='form-card'>
+    <form method='POST' class='form-group container'>
+        {%csrf_token%}
+        {{ form|crispy}}
+    
+    <button type='submit' class='btn btn-success'>Login</button><br><br>
+    Need An Account? <a href="{% url 'register' %}">Singn Up Now</a>
+    </form>
+</div>
 {%endblock content%}

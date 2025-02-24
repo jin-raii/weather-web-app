@@ -174,20 +174,15 @@ document.addEventListener('DOMContentLoaded', function() {
     "Snow Night": "wi-night-snow",
     "Few Clouds Day": "wi-day-cloudy-high",
     "Few Clouds Night": "wi-night-cloud-high"
-    // Add more mappings as needed based on your weather data and icon library
   };
 
   let iconClassName = iconMap[conditionDescription];
 
   if (iconClassName) {
-    // Remove existing weather-icons classes (wi-*)
     weatherIconElement.className = '';
-    // Add the 'wi' base class and the condition-specific class
     weatherIconElement.className = 'wi ' + iconClassName;
   } else {
     console.warn("Weather condition not mapped to icon:", conditionDescription);
-    // Optionally, set a default icon if no mapping is found:
-    // weatherIconElement.className = 'wi wi-na'; // "Not Available" icon
   }
 });
 </script>

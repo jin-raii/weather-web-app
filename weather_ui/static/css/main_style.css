@@ -99,7 +99,9 @@ body {
 
 /* Main Weather Card */
 .weather-card {
-    background: var(--card-dark);
+    /* background-image: url(https://i.pinimg.com/originals/9d/a2/7c/9da27c775dc14e95a1581a34c244858f.jpg); */
+    /* background-image: url(https://www.livewallpapers.com/download/cosmic-nebula-galaxy-wallpaper-75.jpg); */
+
     border-radius: 20px;
     padding: 25px;
     margin-bottom: 20px;
@@ -260,6 +262,12 @@ body {
     color: #888;
 }
 
+.form-card {
+    background-color: var(--card-dark);
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 20px;
+}
 
 
 
@@ -287,53 +295,13 @@ body {
 }
 
 
-
-
-
-   /* Earth style  */
-/* #earth {
-    width: 300px;
-    height: 300px;
-    background: url(https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg);
-    border-radius: 50%;
-    background-size: 610px;
-    box-shadow: inset 8px 36px 80px 36px rgb(0, 0, 0), inset -6px 0 12px 4px rgba(255, 255, 255, 0.3);
-    animation-name: rotate;
-    animation-duration: 12s;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    -webkit-animation-name: rotate;
-        -webkit-animation-duration: 12s;
-        -webkit-animation-iteration-count: infinite;
-        -webkit-animation-timing-function: linear;
-}
-@keyframes rotate {
-    from {
-        background-position: 0px 0px;
-    }
-    to {
-        background-position: 610px 0px;
-    }
-}
-@-webkit-keyframes rotate {
-    from {
-        background-position: 0px 0px;
-    }
-    to {
-        background-position: 610px 0px;
-    }
-} */
-
-/* In your minimal_weather_card.css or within the <style> tags in your HTML */
-
-/* ... your other CSS rules ... */
-
 #earth {
     width: 300px;
-    height: 300px;
-    background: url(https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg);
+    height: 300px; 
+    background-image: url(https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_atmos_4096.jpg);
     border-radius: 50%;
-    background-size: 610px; /* Adjusted background-size */
+    background-repeat: no-repeat; 
+    background-position: center center;
     box-shadow: inset 8px 36px 80px 36px rgb(0, 0, 0), inset -6px 0 12px 4px rgba(255, 255, 255, 0.3);
     animation-name: rotate;
     animation-duration: 12s;
@@ -346,21 +314,20 @@ body {
 }
 @keyframes rotate {
     from {
-        background-position: 0px 0px;
+        background-position: 100% center; /* Start position: right edge */
     }
     to {
-        background-position: 610px 0px;
+        background-position: 0% center;    /* End position: left edge */
     }
 }
 @-webkit-keyframes rotate {
     from {
-        background-position: 0px 0px;
+        background-position: 100% center; /* Start position: right edge */
     }
     to {
-        background-position: 610px 0px; 
+        background-position: 0% center;    /* End position: left edge */
     }
 }
-
 
 .weather-card {
     position: relative; 

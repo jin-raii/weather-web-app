@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
-
-{%load crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-
-<form method='POST' class='form-group'>
-    {%csrf_token%}
-    {{ form|crispy }}
-<br>
-
-<button type='submit' class='btn btn-success'>Submit</button><br><br>
-Already Have An Account? <a href="{%url 'login' %}">Login</a>
-</form>
-
+<div class="container-signup">  
+    <div class='form-card'>
+        <h1 class="form-heading">Sign Up</h1>
+        <form method='POST' class='form-group'>
+            {%csrf_token%}
+            {{ form|crispy }}
+        <br>
+        <button type='submit' class='btn btn-success submit-button'>Get Started</button><br><br> 
+        Already Have An Account? <a href="{%url 'login' %}" class="login-link">Login</a> 
+        </form>
+    </div>
+</div>
 {% endblock%}

@@ -7,14 +7,36 @@
     --text-dark: #ffffff;
     --text-light: #000000;
     --accent-green: #4CAF50;
+    --body-background-light: #f0f4f8;
+    --text-color-dark: #222831;  
+    --card-dark: #222831;
+        --body-background: #393E46;
+        --highlight-color: #00adb5;
+        --text-color-light: #EEEEEE;
 }
 
-body {
+/* body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: var(--dark-bg);
     color: var(--text-dark);
+} */
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smooth transition for color changes */
+}
+
+body.light-mode { 
+    background-color: var(--body-background-light);
+    color: var(--text-color-dark);
 }
 
 .container {
@@ -262,11 +284,96 @@ body {
     color: #888;
 }
 
+.container-signup {                    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;                          
+    height: 100vh;                          
+}
+
+
 .form-card {
     background-color: var(--card-dark);
-    border-radius: 20px;
-    padding: 25px;
-    margin-bottom: 20px;
+    border-radius: 15px;                    
+    padding: 30px;                           
+    margin-bottom: 20px;                      
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5); 
+    width: 100%;                             
+    max-width: 500px;           
+    transition: background-color 0.5s ease, color 0.5s ease;              
+}
+.form-card.light-mode { /* Styles for light mode applied to form-card */
+    background-color: var(--card-light);
+    color: var(--text-color-dark);
+}
+
+.form-heading {                            
+    color: var(--text-color-light);
+    text-align: center;                     
+    margin-bottom: 25px;                 
+    font-size: 2.2em;                        
+    font-weight: bold;
+    letter-spacing: 1px;    
+    transition: color 0.5s ease;               
+}
+.form-heading.light-mode { /* Styles for light mode applied to form-heading */
+    color: var(--text-color-dark);
+    transition: color 0.5s ease; 
+}
+
+
+.form-text {
+    color: var(--text-color-light);    
+    transition: color 0.5s ease;     
+}
+
+.btn-success {                           
+    background-color: var(--highlight-color) !important;
+    border-color: var(--accent-green) !important;   
+    color: var(--accent-green) !important;                       
+    padding: 10px 20px;                             
+    border-radius: 8px;                            
+    font-weight: bold;
+    transition: background-color 0.3s ease;    
+
+}
+
+.btn-success:hover {                           
+    background-color: #008990 !important;     
+    border-color: #008990 !important;
+}
+
+.login-link {                                
+    color: var(--accent-green);           
+    text-decoration: none;                  
+    font-weight: bold;
+}
+
+.login-link:hover {                          
+    text-decoration: underline;            
+    color: #00c2cf;                           
+}
+
+
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+    background-color: #333;                    
+    color: var(--text-color-light);       
+    border: 1px solid #555;               
+    border-radius: 5px;                    
+    padding: 10px;                           
+    margin-bottom: 10px;                      
+    width: calc(100% - 22px);                  
+}
+
+input[type='text']:focus,                     
+input[type='email']:focus,
+input[type='password']:focus {
+    border-color: var(--highlight-color);    
+    box-shadow: 0 0 5px rgba(0, 173, 181, 0.5); 
+    outline: none;                             
 }
 
 
@@ -367,4 +474,67 @@ body {
     border-radius: 5px;
     padding: 10px;
     text-align: center;
+}
+
+
+
+
+/* Mode Toggle Switch Styles */
+.mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-right: 20px; /* Adjust spacing from search bar */
+    transition: transform 0.3s ease; /* Add transition for smooth click effect */
+}
+
+.mode-toggle:hover {
+    transform: scale(1.1); /* Slightly scale up on hover */
+}
+
+.mode-toggle .switch {
+    position: relative;
+    width: 40px;
+    height: 20px;
+    border-radius: 15px;
+    background-color: #555; /* Default switch background color */
+    transition: background-color 0.5s ease; /* Smooth transition for switch background */
+}
+
+.mode-toggle .switch::before { /* Circle inside the switch */
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--text-color-light); /* Default circle color (light) */
+    transition: transform 0.5s ease, background-color 0.5s ease; /* Smooth transitions for circle */
+}
+
+.mode-toggle i { /* Style for the moon/sun icon */
+    position: absolute;
+    font-size: 0.8em;
+    color: #EEEEEE; /* Default icon color (light) */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: color 0.5s ease; /* Smooth transition for icon color */
+}
+
+
+/* Light Mode Switch Styles */
+body.light-mode .mode-toggle .switch {
+    background-color: #ddd; /* Light mode switch background */
+}
+
+body.light-mode .mode-toggle .switch::before {
+    transform: translateX(20px); /* Move circle to the right in light mode */
+    background-color: var(--text-color-dark); /* Dark circle in light mode */
+}
+
+body.light-mode .mode-toggle i {
+    color: #333; /* Dark icon color in light mode */
 }

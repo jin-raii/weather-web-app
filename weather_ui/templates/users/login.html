@@ -3,7 +3,9 @@
 {%block title %} Login Form {%endblock%}
 
 {%block content%}
+<div class='container-signup'>
 <div class='form-card'>
+    <h1 class="form-heading">Login</h1>
     <form method='POST' class='form-group container'>
         {%csrf_token%}
         {{ form|crispy}}
@@ -11,5 +13,6 @@
     <button type='submit' class='btn btn-success'>Login</button><br><br>
     Need An Account? <a href="{% url 'register' %}">Singn Up Now</a>
     </form>
+</div>
 </div>
 {%endblock content%}

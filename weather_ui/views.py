@@ -22,7 +22,7 @@ ENV = os.environ.get('WEATHER_API_KEY')
 FORECAST_ENV = os.environ.get('WEATHER_FORECAST_API_KEY')
 # Create your views here.
 def test(request):
-    return render(request, 'index.html', context={'hello':'there'})
+    return render(request, 'map.html', context={'hello':'there'})
 
 def login(request):
     return render(request, 'login.html')
@@ -167,7 +167,7 @@ def plot_data():
                 x=data['timestamp'],
                 y=data[metric],
                 name=metric,
-                visible=(metric == 'temperature')  # Only show temperature by default
+                visible=(metric == 'temperature') 
             )
         )
     
@@ -182,7 +182,7 @@ def plot_data():
                   {"title": f"{metric.capitalize()} over Time"}]
         ))
     
-    # Update layout with dropdown menu
+
     fig.update_layout(
         updatemenus=[dict(
             active=0,
@@ -195,7 +195,6 @@ def plot_data():
         title="Temperature over Time"
     )
     
-    # Create and return the plot div
     plot_div = plot(fig, show_link=False, output_type='div')
     return plot_div
 

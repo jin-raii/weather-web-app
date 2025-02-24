@@ -4,44 +4,26 @@
 {%block content%}
 
     <div class="container">
-        
-        <!-- Search Bar -->
+
         <div class="search-container">
-            <!-- Mode Toggle -->
             <div class="mode-toggle">
                 <div class="switch">
                     <i class="fas fa-moon"></i>
                 </div>
-                {% comment %} <span>Dark Mode</span> {% endcomment %}
             </div>
             <div class="search-bar">
-                
-                    
-                  
-                {% comment %} <i class="fas fa-search"></i>  {% endcomment %}
-                {% comment %} <input type="text" placeholder="Search for your preferred city...">  {% endcomment %}
                 <form method="post" class="mb-4" id="weatherForm" style="display: contents">
                     {% csrf_token %}
-                   
                             {{ form.city }}
-                      
-                       
                             <button type="submit" class="btn btn-search" id='search-btn'><i class="fas fa-search" style="color: white;"></i></button>
-                       
-               
                 </form>
-                
             </div>
-            {% comment %} <button class="location-btn">
-                <i class="fas fa-location-dot"></i>
-                Current Location
-            </button> {% endcomment %}
             {% if user.is_authenticated %}
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
                 <button type="submit"  class='location-btn'>Log out</button>
             </form>
-               
+
             {% else %}
                 <div class='buttons'>
                     <a href="{%url 'register' %}" class='location-btn'> SignUp</a>
@@ -51,24 +33,22 @@
                 </div>
             {%endif%}
         </div>
-        
-        <!-- Main Weather Card -->
-        <div class="weather-card">
-            <div class="location-info">
-                {% comment %} {% for weather in res  %}
-                    <h2> {{weather}} </h2>
-                {% endfor %}   {% endcomment %}
-               
-                <h2>{{res.name}}</h2>
-                <div class="time">{{ current_weather.timezone  }}</div>
-                <div class="date">Thursday, 31 Aug</div>
-            </div>
-            <div class='container weather-info'>
 
+        <div class="weather-card">
+            <div id='earth'>
+
+            </div> 
+                
+                <div class="location-info">
+                    <h2>{{res.name}}</h2>
+                    <div class="time">{{ current_weather.timezone  }}</div>
+                    <div class="date">Thursday, 31 Aug</div>
+                </div>
+            <div class='container weather-info'>
                 <div class="weather-info">
                     <div class="temperature">
-                        {{weather_data.main.temp}}&deg;C
-                        <span class="feels-like">Feels like: {{res.main.feels_like}}&deg;C</span>
+                        {{weather_data.main.temp}}°C
+                        <span class="feels-like">Feels like: {{res.main.feels_like}}°C</span>
                        <span class='feels-like'> Weather: {{ weather_data.weather.0.description }}</span>
                     </div>
                     <div class="weather-details">
@@ -83,12 +63,12 @@
                             </div>
                         </div>
                         <div class="condition">
-                            <i class="wi wi-day-sunny"></i>
-                            <span>{{res.weather.main}}</span>
+                            <i class="wi wi-day-sunny" id="weather-icon"></i>  {# Added id="weather-icon" #}
+                            <span id="condition-text">{{res.weather.main}}</span>
                         </div>
                     </div>
                 </div>
-    
+
                 <div class="weather-metrics">
                     <div class="metric">
                         <i class="wi wi-humidity"></i>
@@ -114,21 +94,12 @@
             </div>
         </div>
 
-        <!-- Leaflet Map  -->
         <div class="container mt-4">
             <div id="map"></div>
         </div>
 
-        {% autoescape off %}
-        
-            <div class="container mt-4">
-                {{plot}}
-            </div>
-        {% endautoescape %}
 
-        <!-- Forecast Container -->
         <div class="forecast-container">
-            <!-- 5 Days Forecast -->
             <div class="forecast-section">
                 <div class="forecast-header">5 Days Forecast:</div>
                 <div class="forecast-list">
@@ -160,42 +131,65 @@
                 </div>
             </div>
 
-            <!-- Hourly Forecast -->
             <div class="forecast-section">
-                <div class="forecast-header">Hourly Forecast:</div>
-                <div class="hourly-list">
-                    <div class="hourly-item">
-                        <div class="time">12:00</div>
-                        <i class="wi wi-day-sunny"></i>
-                        <div class="temp">26°C</div>
-                        <div class="wind">3km/h</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="time">15:00</div>
-                        <i class="wi wi-day-sunny"></i>
-                        <div class="temp">27°C</div>
-                        <div class="wind">2km/h</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="time">18:00</div>
-                        <i class="wi wi-day-cloudy"></i>
-                        <div class="temp">27°C</div>
-                        <div class="wind">3km/h</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="time">21:00</div>
-                        <i class="wi wi-night-cloudy"></i>
-                        <div class="temp">25°C</div>
-                        <div class="wind">3km/h</div>
-                    </div>
-                    <div class="hourly-item">
-                        <div class="time">00:00</div>
-                        <i class="wi wi-night-clear"></i>
-                        <div class="temp">22°C</div>
-                        <div class="wind">3km/h</div>
-                    </div>
+                {% autoescape off %}
+
+                <div class="container-fluid">
+                    {{plot}}
                 </div>
+            {% endautoescape %}
             </div>
         </div>
     </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const weatherIconElement = document.getElementById('weather-icon');
+  const conditionDescription = "{{ res.weather.0.main }}"; 
+  console.log(conditionDescription)
+
+  const iconMap = {
+    "Clear": "wi-day-sunny",
+    "Clouds": "wi-cloudy",
+    "Rain": "wi-rain",
+    "Snow": "wi-snow",
+    "Thunderstorm": "wi-thunderstorm",
+    "Drizzle": "wi-sprinkle",
+    "Fog": "wi-fog",
+    "Mist": "wi-mist",
+    "Haze": "wi-haze",
+    "Smoke": "wi-smoke",
+    "Dust": "wi-dust",
+    "Sand": "wi-sandstorm",
+    "Tornado": "wi-tornado",
+    "Hurricane": "wi-hurricane",
+    "Hot": "wi-hot",
+    "Cold": "wi-snowflake-cold",
+    "Windy": "wi-windy",
+    "Cloudy Day": "wi-day-cloudy",
+    "Cloudy Night": "wi-night-cloudy",
+    "Rain Day": "wi-day-rain",
+    "Rain Night": "wi-night-rain",
+    "Snow Day": "wi-day-snow",
+    "Snow Night": "wi-night-snow",
+    "Few Clouds Day": "wi-day-cloudy-high",
+    "Few Clouds Night": "wi-night-cloud-high"
+    // Add more mappings as needed based on your weather data and icon library
+  };
+
+  let iconClassName = iconMap[conditionDescription];
+
+  if (iconClassName) {
+    // Remove existing weather-icons classes (wi-*)
+    weatherIconElement.className = '';
+    // Add the 'wi' base class and the condition-specific class
+    weatherIconElement.className = 'wi ' + iconClassName;
+  } else {
+    console.warn("Weather condition not mapped to icon:", conditionDescription);
+    // Optionally, set a default icon if no mapping is found:
+    // weatherIconElement.className = 'wi wi-na'; // "Not Available" icon
+  }
+});
+</script>
+
 {%endblock content%}

@@ -13,6 +13,7 @@
         --body-background: #393E46;
         --highlight-color: #00adb5;
         --text-color-light: #EEEEEE;
+        --theme-color: #1a3356;
 }
 
 /* body {
@@ -536,5 +537,23 @@ body.light-mode .mode-toggle .switch::before {
 }
 
 body.light-mode .mode-toggle i {
-    color: #333; /* Dark icon color in light mode */
+    color: #333; 
+}
+.container.mt-4 h2 {
+    color: var(--text-color-light);
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center; 
+    margin-top: 25px;   
+    margin-bottom: 25px; 
+    padding-left: 0;     
+    border-left: 4px solid var(--theme-color);  
+    border-right: 4px solid var(--theme-color);  
+
+    transition: color 0.5s ease;
+}
+
+body.light-mode .container.mt-4 h2 { /* Light mode style for the map heading */
+    color: var(--text-color-dark);
+    /* border-color: var(--highlight-color);  No border anymore, so no need to change border-color in light mode */
 }

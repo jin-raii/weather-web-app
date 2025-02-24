@@ -95,49 +95,53 @@
         </div>
 
         <div class="container mt-4">
+            <h2>{{ res.name }} Weather Map</h2> 
             <div id="map"></div>
         </div>
 
-
-        <div class="forecast-container">
-            <div class="forecast-section">
-                <div class="forecast-header">5 Days Forecast:</div>
-                <div class="forecast-list">
-                    <div class="forecast-item">
-                        <i class="wi wi-day-cloudy"></i>
-                        <span class="temp">20°C</span>
-                        <span class="day">Friday, 1 Sep</span>
-                    </div>
-                    <div class="forecast-item">
-                        <i class="wi wi-day-cloudy"></i>
-                        <span class="temp">22°C</span>
-                        <span class="day">Saturday, 2 Sep</span>
-                    </div>
-                    <div class="forecast-item">
-                        <i class="wi wi-day-sunny"></i>
-                        <span class="temp">27°C</span>
-                        <span class="day">Sunday, 3 Sep</span>
-                    </div>
-                    <div class="forecast-item">
-                        <i class="wi wi-day-rain"></i>
-                        <span class="temp">18°C</span>
-                        <span class="day">Monday, 4 Sep</span>
-                    </div>
-                    <div class="forecast-item">
-                        <i class="wi wi-day-rain"></i>
-                        <span class="temp">16°C</span>
-                        <span class="day">Tuesday, 5 Sep</span>
+        <div class='container mt-4'>
+            <h2> {{ res.name }} Data Visualization </h2>
+            <div class="forecast-container">
+                <div class="forecast-section">
+                    <div class="forecast-header">5 Days Forecast:</div>
+                    <div class="forecast-list">
+                        <div class="forecast-item">
+                            <i class="wi wi-day-cloudy"></i>
+                            <span class="temp">20°C</span>
+                            <span class="day">Friday, 1 Sep</span>
+                        </div>
+                        <div class="forecast-item">
+                            <i class="wi wi-day-cloudy"></i>
+                            <span class="temp">22°C</span>
+                            <span class="day">Saturday, 2 Sep</span>
+                        </div>
+                        <div class="forecast-item">
+                            <i class="wi wi-day-sunny"></i>
+                            <span class="temp">27°C</span>
+                            <span class="day">Sunday, 3 Sep</span>
+                        </div>
+                        <div class="forecast-item">
+                            <i class="wi wi-day-rain"></i>
+                            <span class="temp">18°C</span>
+                            <span class="day">Monday, 4 Sep</span>
+                        </div>
+                        <div class="forecast-item">
+                            <i class="wi wi-day-rain"></i>
+                            <span class="temp">16°C</span>
+                            <span class="day">Tuesday, 5 Sep</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="forecast-section">
-                {% autoescape off %}
-
-                <div class="container-fluid">
-                    {{plot}}
+    
+                <div class="forecast-section">
+                    
+                    {% autoescape off %}
+    
+                    <div class="container-fluid">
+                        {{plot}}
+                    </div>
+                {% endautoescape %}
                 </div>
-            {% endautoescape %}
             </div>
         </div>
     </div>

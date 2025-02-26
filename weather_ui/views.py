@@ -1,10 +1,13 @@
 import datetime  
 from django.shortcuts import render, redirect
-from django.http import request, HttpResponse
+from django.http import HttpResponseRedirect, request, HttpResponse
 from .forms import UserRegistrationForm, CityForm
 from django.contrib import messages
-from dotenv import dotenv_values
-from pathlib import Path
+from django.urls import reverse
+from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
+
 from datetime import datetime
 import os
 import requests
@@ -25,8 +28,7 @@ FORECAST_ENV = os.environ.get('WEATHER_FORECAST_API_KEY')
 def test(request):
     return render(request, 'map.html', context={'hello':'there'})
 
-def login(request):
-    return render(request, 'login.html')
+
 
 def index(request):
     context = {
@@ -41,11 +43,8 @@ def index(request):
     }
     return render(request, 'main.html', context=context)
 
-def weather_dashboard(request):
-    res = get_current_data()
-    get_forecast()
-    # print(f'response : {res}')
-    return render(request, 'main.html', {'res':res})
+def signup_page(request):
+   return HttpResponseRedirect(reverse('register'))
 
 def get_current_data():
     try:
@@ -68,11 +67,15 @@ def register(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Created account now you can login {username}')
+            print(f'request type: {type(request)}')
+            print(f'user: {type(user)}')
+            print(f'username: {user}')
+            login(request, user)
             # messages.add_message('username')
-            return redirect('login')
+            return HttpResponseRedirect(reverse('login'))
     else:
         form = UserRegistrationForm()
 
@@ -80,7 +83,7 @@ def register(request):
 
 
 
-
+@login_required
 def weather_map(request):
 
     weather_data = None

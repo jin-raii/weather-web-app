@@ -5,7 +5,7 @@
 <div class="container-signup">  
     <div class='form-card'>
         <h1 class="form-heading">Sign Up</h1>
-        <form method='POST' class='form-group'>
+        <form method='POST' class='form-group' enctype="application/x-www-form-urlencoded">
             {%csrf_token%}
             {{ form|crispy }}
         <br>

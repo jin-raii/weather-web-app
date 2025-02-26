@@ -399,13 +399,15 @@ body.light-mode {
 }
 
 .btn-success {                           
-    background-color: var(--highlight-color) !important;
+    background-color: var(--body-background) !important;
     border-color: var(--accent-green) !important;   
-    color: var(--accent-green) !important;                       
     padding: 10px 20px;                             
     border-radius: 8px;                            
     font-weight: bold;
-    transition: background-color 0.3s ease;    
+    transition: background-color 0.3s ease;   
+    border-bottom: 1px solid;
+    border-top: none;
+    border-left: none; 
 
 }
 
@@ -584,7 +586,7 @@ input[type='password']:focus {
     transition: transform 0.5s ease, background-color 0.5s ease; /* Smooth transitions for circle */
 }
 
-.mode-toggle i { /* Style for the moon/sun icon */
+.mode-toggle i { 
     position: absolute;
     font-size: 0.8em;
     color: #EEEEEE; /* Default icon color (light) */

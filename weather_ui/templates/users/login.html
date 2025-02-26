@@ -6,13 +6,20 @@
 <div class='container-signup'>
 <div class='form-card'>
     <h1 class="form-heading">Login</h1>
-    <form method='POST' class='form-group container'>
+    <form method='POST' class='form-group container' id='loginForm'>
         {%csrf_token%}
         {{ form|crispy}}
     
     <button type='submit' class='btn btn-success'>Login</button><br><br>
     Need An Account? <a href="{% url 'register' %}">Singn Up Now</a>
+
+    <div id="loading" style="display: none; margin-top: 10px;">
+        Loading... <div class="spinner-border spinner-border-sm" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </form>
 </div>
 </div>
+
 {%endblock content%}

@@ -15,6 +15,7 @@ from plotly.graph_objects import Scatter3d, Scatter
 import plotly.graph_objs as go
 import pandas as pd
 import json
+import pickle
 
 # ENV = dotenv_values(Path('../.env'))
 # print(f'env file {ENV["WEATHER_API_KEY"]}')
@@ -41,38 +42,6 @@ def index(request):
     return render(request, 'main.html', context=context)
 
 def weather_dashboard(request):
-    context = {
-        'current_weather': {
-            'city': 'Kathmandu',
-            'temperature': 24,
-            'feels_like': 22,
-            'condition': 'Sunny',
-            'humidity': 41,
-            'wind_speed': 2,
-            'pressure': 997,
-            'uv_index': 8,
-            # 'timezone': pytz.timezone('Asia/kathmandu'),
-            'timezone':'timezone',
-            # 'current_time': datetime.now(pytz.timezone('Asia/kathmandu')),
-            'current_time': datetime.now(),
-            'sunrise': '06:37 AM',
-            'sunset': '20:37 PM'
-        },
-        'daily_forecast': [
-            {'day': 'Friday, 1 Sep', 'temp': 20, 'condition': 'Cloudy'},
-            {'day': 'Saturday, 2 Sep', 'temp': 22, 'condition': 'Cloudy'},
-            {'day': 'Sunday, 3 Sep', 'temp': 27, 'condition': 'Sunny'},
-            {'day': 'Monday, 4 Sep', 'temp': 18, 'condition': 'Rain'},
-            {'day': 'Tuesday, 5 Sep', 'temp': 16, 'condition': 'Rain'}
-        ],
-        'hourly_forecast': [
-            {'time': '12:00', 'temp': 26, 'condition': 'Sunny', 'wind': 3},
-            {'time': '15:00', 'temp': 27, 'condition': 'Sunny', 'wind': 2},
-            {'time': '18:00', 'temp': 27, 'condition': 'Cloudy', 'wind': 3},
-            {'time': '21:00', 'temp': 25, 'condition': 'Cloudy', 'wind': 3},
-            {'time': '00:00', 'temp': 22, 'condition': 'Clear', 'wind': 3}
-        ]
-    }
     res = get_current_data()
     get_forecast()
     # print(f'response : {res}')
@@ -123,9 +92,9 @@ def weather_map(request):
         if form.is_valid():
             city = form.cleaned_data['city']
             url = f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={ENV}&units=metric'
-            response = requests.get(url)
-            if response.status_code == 200:
-                weather_data = response.json()
+            res = requests.get(url)
+            if res.status_code == 200:
+                weather_data = res.json()
                 print(f'weather_data: {weather_map}')
     else:
         form = CityForm(initial={'city': default_city})
@@ -134,6 +103,8 @@ def weather_map(request):
         if res.status_code == 200:
             weather_data = res.json()
 
+    
+    pred = predict_data(res)
     res = get_current_data()
     plot_d =  plot_data()
     return render(request, 'main.html', {
@@ -144,6 +115,33 @@ def weather_map(request):
         'plot': plot_d
     })
 
+def predict_data(res):
+    # res = res.json()
+    data = res.json()
+    features = {
+        'temperature': data['main']['temp'],
+        'humidity': data['main']['humidity'],
+        'pressure': data['main']['pressure'],
+        'wind_speed': data['wind']['speed'],
+        'wind_degree': data['wind']['deg'],
+        'clouds_percentage': data['clouds']['all'],
+        'visibility': data['visibility']
+    }
+    X_feat = pd.DataFrame([features])
+    model_pkl = 'model/model.pkl'
+
+    try:
+        with open(model_pkl, 'rb') as m:
+            model = pickle.load(m)
+        y_pred = model.predict(X_feat)
+        print(y_pred)
+    except Exception as e:
+        print('file not found')
+        return {'message': 'something went wrong {e}'}
+
+
+
+    
 # def plot_data():
     
 #     data = pd.DataFrame(flatten_weather_data())

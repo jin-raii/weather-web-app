@@ -72,29 +72,33 @@ body.light-mode {
     margin-bottom: 20px;
 }
 
-.search-bar {
+
+
+
+
+
+
+/* .search-bar {
     flex: 1;
     position: relative;
     display: flex;
     align-items: center;
-    /* background: var(--card-dark); */
     border-radius: 25px;
     padding: 5px 15px;
-}
+} */
 
-.search-bar input {
+/* .search-bar input {
     width: 100%;
     padding: 10px;
     background: #272626;
     border: none;
     color: var(--text-dark);
     margin-left: 10px;
-    /* border-radius: 50px; */
     margin-right: -50px;
    
-}
+} */
 
-.btn-search {
+/* .btn-search {
     float: left;
   width: 20%;
   padding: 8px;
@@ -102,11 +106,10 @@ body.light-mode {
   color: white;
   font-size: 17px;
   border: 1px solid var(--accent-green);
-  /* border-left: none; */
   cursor: pointer;
-}
+} */
 
-.location-btn {
+/* .location-btn {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -118,6 +121,72 @@ body.light-mode {
     cursor: pointer;
     font-weight: 500;
     text-decoration: none;
+} */
+
+
+
+/* ... your existing styles ... */
+
+.search-bar {
+    flex: 1; /* Take up available space in the search container */
+    position: relative;
+    display: flex; /* Use flexbox for layout */
+    align-items: center;
+    border-radius: 25px;
+    padding: 5px 15px;
+    overflow: hidden; /* To prevent content from overflowing rounded corners */
+}
+
+.search-bar input {
+    flex: 1; /* Input takes up remaining space */
+    padding: 10px;
+    background: transparent; /* Make input background transparent */
+    border: none;
+    color: var(--text-color-light); /* Use --text-color-light for input text */
+    margin-left: 10px;
+    margin-right: 0; /* Remove negative margin */
+    border-radius: 0; /* Remove border-radius from input */
+    outline: none; /* Remove default focus outline */
+}
+
+.search-bar input::placeholder {
+    color: rgba(var(--text-color-light-rgb), 0.7); 
+}
+
+
+.btn-search {
+    width: auto; 
+    padding: 8px 15px;
+    color: var(--text-color-dark); 
+    font-size: 17px;
+    border: 2px solid var(--theme-color); 
+    border-radius: 25px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-search:hover {
+    background-color: #008990; 
+}
+
+
+.location-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    background: transparent; /* Make location button background transparent */
+    color: var(--text-color-light); /* Keep light text color */
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.3s ease; /* Add hover transition */
+}
+
+.location-btn:hover {
+    background-color: rgba(var(--text-color-light-rgb), 0.1); /* Light hover background */
 }
 
 /* Main Weather Card */
@@ -365,7 +434,7 @@ input[type='password'] {
     border: 1px solid #555;               
     border-radius: 5px;                    
     padding: 10px;                           
-    margin-bottom: 10px;                      
+    /* margin-bottom: 10px;                       */
     width: calc(100% - 22px);                  
 }
 

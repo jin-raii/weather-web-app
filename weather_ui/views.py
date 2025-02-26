@@ -112,11 +112,12 @@ def weather_map(request):
         'weather_data': weather_data,
         'mapbox_access_token': 'your_mapbox_token',
         'res': res,
-        'plot': plot_d
+        'plot': plot_d,
+        'pred': pred
     })
 
 def predict_data(res):
-    # res = res.json()
+
     data = res.json()
     features = {
         'temperature': data['main']['temp'],
@@ -128,14 +129,16 @@ def predict_data(res):
         'visibility': data['visibility']
     }
     X_feat = pd.DataFrame([features])
-    model_pkl = 'model/model.pkl'
+    # model_pkl = 'model/model.pkl'
+    model_pkl = os.path.join(os.path.dirname(__file__), 'static/model/model.pkl') 
 
     try:
         with open(model_pkl, 'rb') as m:
             model = pickle.load(m)
         y_pred = model.predict(X_feat)
-        print(y_pred)
+        return y_pred[0]
     except Exception as e:
+        print(os.path.join(os.path.dirname(__file__)))
         print('file not found')
         return {'message': 'something went wrong {e}'}
 
@@ -153,7 +156,11 @@ def predict_data(res):
 def plot_data():
     data = pd.DataFrame(flatten_weather_data())
     data['timestamp'] = pd.to_datetime(data['timestamp'])
-    
+    # second = data['timestamp'].dt.second
+    numerical_columns = ['temperature', 'feels_like', 'temp_min', 'temp_max', 'pressure', 'humidity', 'sea_level', 'ground_level', 'visibility', 'wind_speed', 'wind_degree', 'clouds_percentage'] # List of your numerical columns
+
+    daily_avg_weather = data.groupby(data['timestamp'].dt.second)[numerical_columns].mean() 
+
     # Create figure with dropdown menu
     fig = go.Figure()
     
@@ -162,8 +169,8 @@ def plot_data():
     for metric in metrics:
         fig.add_trace(
             go.Scatter(
-                x=data['timestamp'],
-                y=data[metric],
+                x=daily_avg_weather.index,
+                y=daily_avg_weather[metric],
                 name=metric,
                 visible=(metric == 'temperature') 
             )
@@ -177,7 +184,8 @@ def plot_data():
             label=metric.capitalize(),
             method="update",
             args=[{"visible": visibility},
-                  {"title": f"{metric.capitalize()} over Time"}]
+                  {"title": f"{metric.capitalize()} over Time"},
+                  ]
         ))
     
 
@@ -190,7 +198,9 @@ def plot_data():
             x=0.1,
             y=1.15
         )],
-        title="Temperature over Time"
+        title="Temperature over Time",
+        yaxis_title='temperature',
+        xaxis_title = 'second'
     )
     
     plot_div = plot(fig, show_link=False, output_type='div')

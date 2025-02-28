@@ -61,3 +61,11 @@ python manage.py runserver
 *   `http://127.0.0.1:8000/register/` - Signup
 *   `http://127.0.0.1:8000/login/` - Login
 *   `http://127.0.0.1:8000/logout/` - Logout
+
+
+```
+
+
+## Please find the Google Drive link for the project overview
+
+[Drive Link](https://drive.google.com/drive/folders/1eU2OLNj_RFTW-uyCbYvcGVvzU8uXH1zj?usp=drive_link)

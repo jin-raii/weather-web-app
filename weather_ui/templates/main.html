@@ -8,7 +8,7 @@
         <div class="search-container">
             <div class="mode-toggle">
                 <div class="switch">
-                    <i class="fas fa-moon"></i>
+                    
                 </div>
             </div>
             <div class="search-bar">
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="condition">
-                            <i class="wi wi-day-sunny" id="weather-icon"></i>  {# Added id="weather-icon" #}
+                            <i class="wi wi-day-sunny" id="weather-icon"></i>  
                             <span id="condition-text">{{res.weather.main}}</span>
                         </div>
                     </div>
@@ -86,10 +86,15 @@
                         <label>Pressure</label>
                     </div>
                     <div class="metric">
-                        <i class="wi wi-day-sunny"></i>
-                        <span>8</span>
-                        <label>UV</label>
-                    </div>
+                        <i class="fas fa-water"></i>
+                        <span>{{res.main.sea_level}}</span>
+                        <label>Sea Level</label>
+                    </div> 
+                    <div class="metric">
+                        <i class="fas fa-mountain"></i>
+                        <span>{{res.main.grnd_level }}</span>
+                        <label>Ground Level</label>
+                    </div> 
                 </div>
             </div>
         </div>
@@ -103,34 +108,44 @@
             <h2> {{ res.name }} Data Visualization </h2>
             <div class="forecast-container">
                 <div class="forecast-section">
-                    <div class="forecast-header">Predicted Weather Description:</div>
+                    <div class="forecast-header">Predicted Weather Description</div>
                     <div class="forecast-list">
                         <div class="forecast-item">
-                            <i class="wi wi-day-cloudy"></i>
-                            <span class='temp'> {{pred}} </span>
-                            {% comment %} <span class="temp">20°C</span>
-                            <span class="day">Friday, 1 Sep</span> {% endcomment %}
+                            {% if pred == 'broken clouds' %}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {% elif pred == 'few clouds' %}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {% elif pred == 'haze' %}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {% elif pred == 'mist' %}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {% elif pred == 'scattered clouds' %}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {%else%}
+                                <div>
+                                    <i class="wi wi-day-cloudy"></i>
+                                    <span class='temp'> {{pred}} </span>
+                                </div>
+                            {% endif %}
+                            {% comment %} <span class='temp'> {{pred}} </span> {% endcomment %}
+                            
                         </div>
-                        <div class="forecast-item">
-                            <i class="wi wi-day-cloudy"></i>
-                            <span class="temp">22°C</span>
-                            <span class="day">Saturday, 2 Sep</span>
-                        </div>
-                        <div class="forecast-item">
-                            <i class="wi wi-day-sunny"></i>
-                            <span class="temp">27°C</span>
-                            <span class="day">Sunday, 3 Sep</span>
-                        </div>
-                        <div class="forecast-item">
-                            <i class="wi wi-day-rain"></i>
-                            <span class="temp">18°C</span>
-                            <span class="day">Monday, 4 Sep</span>
-                        </div>
-                        <div class="forecast-item">
-                            <i class="wi wi-day-rain"></i>
-                            <span class="temp">16°C</span>
-                            <span class="day">Tuesday, 5 Sep</span>
-                        </div>
+                       
                     </div>
                 </div>
     

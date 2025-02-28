@@ -12,9 +12,7 @@ from datetime import datetime
 import os
 import requests
 
-from django.conf import settings
 from plotly.offline import plot
-from plotly.graph_objects import Scatter3d, Scatter
 import plotly.graph_objs as go
 import pandas as pd
 import json
@@ -120,17 +118,21 @@ def weather_map(request):
     })
 
 def predict_data(res):
-
+    
     data = res.json()
-    features = {
-        'temperature': data['main']['temp'],
-        'humidity': data['main']['humidity'],
-        'pressure': data['main']['pressure'],
-        'wind_speed': data['wind']['speed'],
-        'wind_degree': data['wind']['deg'],
-        'clouds_percentage': data['clouds']['all'],
-        'visibility': data['visibility']
-    }
+    print(data)
+    try: 
+        features = {
+            'temperature': data['main']['temp'],
+            'humidity': data['main']['humidity'],
+            'pressure': data['main']['pressure'],
+            'wind_speed': data['wind']['speed'],
+            'wind_degree': data['wind']['deg'],
+            'clouds_percentage': data['clouds']['all'],
+            'visibility': data['visibility']
+        }
+    except Exception:
+        return 'city not found'
     X_feat = pd.DataFrame([features])
     # model_pkl = 'model/model.pkl'
     model_pkl = os.path.join(os.path.dirname(__file__), 'static/model/model.pkl') 

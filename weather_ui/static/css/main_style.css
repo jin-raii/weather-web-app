@@ -159,8 +159,7 @@ body.light-mode {
     padding: 8px 15px;
     color: var(--text-color-dark); 
     font-size: 17px;
-    border: 2px solid var(--theme-color); 
-    border-radius: 25px; 
+    border: 2px solid var(--card-light); 
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -201,6 +200,7 @@ body.light-mode {
 
 .location-info {
     margin-bottom: 30px;
+    font-size: 30px;
 }
 
 .location-info h2 {
@@ -219,15 +219,16 @@ body.light-mode {
 }
 
 .weather-info {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center; */
     margin-bottom: 30px;
 }
 
 .temperature {
     font-size: 4em;
     font-weight: bold;
+    text-align-last: center;
 }
 
 .feels-like {
@@ -240,6 +241,7 @@ body.light-mode {
     display: flex;
     gap: 20px;
     margin-bottom: 20px;
+    justify-content: center;
 }
 
 .sunrise, .sunset {
@@ -254,7 +256,7 @@ body.light-mode {
 
 .weather-metrics {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 20px;
     padding-top: 20px;
     border-top: 1px solid #444;
@@ -280,6 +282,7 @@ body.light-mode {
 .wi {
     font-size: 24px;
     color: #ffffff;
+    display: block;
 }
 
 .metric .wi {
@@ -307,20 +310,24 @@ body.light-mode {
     margin-bottom: 15px;
     font-size: 1.2em;
     color: #888;
+    text-align: center;
 }
 
 .forecast-list {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    /* gap: 15px; */
 }
 
 .forecast-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    text-align-last: center;
     padding: 10px 0;
     border-bottom: 1px solid #444;
+    font-size: 3em;
+    margin-top: 100px;
 }
 
 .forecast-item:last-child {
